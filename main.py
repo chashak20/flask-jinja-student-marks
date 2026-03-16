@@ -13,7 +13,12 @@ def hello_world():
         "Roshan":70,
         "Neha":65,
         "Mayur":72,
-        "Deep":85
+        "Deep":85,
+        "Ritesh":24,
+        "Jesmine":25,
+        "Rishi":23,
+        "Raj":22,
+        "Rina":20
     }
     return render_template("index.html", marks=marks)
 app.run(debug=True)
