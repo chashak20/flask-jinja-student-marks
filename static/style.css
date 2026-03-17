@@ -1,0 +1,53 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f8;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 60%;
+    margin: 40px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #2c3e50;
+}
+
+h2 {
+    color: #e74c3c;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    padding: 10px;
+    margin: 5px 0;
+    background: #ecf0f1;
+    border-radius: 5px;
+}
+
+.grade {
+    font-weight: bold;
+    color: #2980b9;
+}
+
+.fail {
+    background-color: #ffcccc;
+    color: red;
+}
+
+.stats {
+    margin-top: 20px;
+    padding: 15px;
+    background: #dff9fb;
+    border-radius: 5px;
+}
