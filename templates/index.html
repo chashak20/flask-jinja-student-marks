@@ -10,13 +10,10 @@
 <body>
     <h1>Mid Sem Result</h1>
     <ul>
-        <li>The marks of John is {{marks['John']}}</li>
-        <li>The marks of Vishnu is {{marks['Vishnu']}}</li>
-        <li>The marks of Rahul is {{marks['Rahul']}}</li>
-        <li>The marks of Mayur is {{marks['Mayur']}}</li>
-        <li>The marks of Roshan is {{marks['Roshan']}}</li>
-        <li>The marks of Neha is {{marks['Neha']}}</li>
-        <li>The marks of Deep is {{marks['Deep']}}</li>
+        {% for key in marks.keys()%}
+        <li>The marks of {{key}} is {{marks.get(key)}}</li>
+        {% endfor %}
+        
     </ul>
     <h2>Following Students meet to Principal Cabin</h2>
     <ul>
