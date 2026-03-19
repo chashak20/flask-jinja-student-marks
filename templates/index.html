@@ -11,9 +11,14 @@
     <h1>Mid Sem Result</h1>
     <ul>
         {% for key in marks.keys()%}
-        <li>The marks of {{key}} is {{marks.get(key)}}</li>
+        <li>The marks of {{key}} is {{marks.get(key)}}
+        {% if marks.get(key) > 50 %}
+           <span>(GOOD)</span>
+         
+        {% endif %}
+        </li>
         {% endfor %}
-        
+         
     </ul>
     <h2>Following Students meet to Principal Cabin</h2>
     <ul>
