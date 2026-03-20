@@ -1,8 +1,6 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: Arial;
     background-color: #f4f6f8;
-    margin: 0;
-    padding: 0;
 }
 
 .container {
@@ -16,38 +14,33 @@ body {
 
 h1 {
     text-align: center;
-    color: #2c3e50;
-}
-
-h2 {
-    color: #e74c3c;
 }
 
 ul {
-    list-style-type: none;
+    list-style: none;
     padding: 0;
 }
 
 li {
     padding: 10px;
     margin: 5px 0;
-    background: #ecf0f1;
     border-radius: 5px;
 }
 
-.grade {
-    font-weight: bold;
-    color: #2980b9;
+button {
+    padding: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
 }
 
-.fail {
-    background-color: #ffcccc;
-    color: red;
-}
+/* Grade colors */
+.A { background: #d4edda; color: green; }
+.B { background: #d1ecf1; color: blue; }
+.C { background: #fff3cd; color: orange; }
+.Fail { background: #f8d7da; color: red; }
 
 .stats {
     margin-top: 20px;
-    padding: 15px;
-    background: #dff9fb;
-    border-radius: 5px;
+    background: #eee;
+    padding: 10px;
 }
