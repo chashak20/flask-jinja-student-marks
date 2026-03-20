@@ -3,30 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prerena Convent</title>
-    <!--Link CSS-->
+    <title>Student Dashboard</title>
+
+    <!-- Link CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>Mid Sem Result</h1>
-    <ul>
-        {% for key in marks.keys()%}
-        <li>The marks of {{key}} is {{marks.get(key)}}
-        {% if marks.get(key) > 50 %}
-           <span>(GOOD)</span>
-         
-        {% endif %}
-        </li>
-        {% endfor %}
-         
-    </ul>
-    <h2>Following Students meet to Principal Cabin</h2>
-    <ul>
-        <li>Rina</li>
-        <li>Raj</li>
-        <li>Rishi</li>
-        <li>Jesmine</li>
-        <li>Ritesh</li>
-    </ul>
+
+    <div class="container">
+
+        <h1>📊 Mid Sem Result</h1>
+
+        <ul>
+            {% for name, mark in marks.items() %}
+                <li>
+                    {{ name }} - {{ mark }} 
+                    <span class="grade">({{ get_grade(mark) }})</span>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <div class="stats">
+            <h3>Total Marks: {{ total }}</h3>
+            <h3>Average Marks: {{ average }}</h3>
+        </div>
+
+        <h2>⚠️ Students Below 50</h2>
+        <ul>
+            {% for name, mark in marks.items() %}
+                {% if mark < 50 %}
+                    <li class="fail">{{ name }} - {{ mark }}</li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+
+        <h2>📢 Meet Principal</h2>
+        <ul>
+            <li>Rina</li>
+            <li>Raj</li>
+            <li>Rishi</li>
+            <li>Jesmine</li>
+            <li>Ritesh</li>
+        </ul>
+
+    </div>
+
 </body>
 </html>
