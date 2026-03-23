@@ -3,22 +3,7 @@ import sqlite3
 
 app = Flask(__name__)
 
-# Create DB
-def init_db():
-    conn = sqlite3.connect("students.db")
-    cursor = conn.cursor()
-    cursor.execute("""
-        CREATE TABLE IF NOT EXISTS students (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            name TEXT,
-            marks INTEGER
-        )
-    """)
-    conn.commit()
-    conn.close()
-
-init_db()
-
+# ---------- Grade Function ----------
 def get_grade(mark):
     if mark >= 75:
         return "A"
@@ -29,15 +14,23 @@ def get_grade(mark):
     else:
         return "Fail"
 
+# ---------- Home ----------
 @app.route("/")
 def home():
+    search = request.args.get("search")
+
     conn = sqlite3.connect("students.db")
     cursor = conn.cursor()
-    cursor.execute("SELECT name, marks FROM students")
+
+    if search:
+        cursor.execute("SELECT rowid, name, marks FROM students WHERE name LIKE ?", ('%' + search + '%',))
+    else:
+        cursor.execute("SELECT rowid, name, marks FROM students")
+
     data = cursor.fetchall()
     conn.close()
 
-    total = sum([row[1] for row in data]) if data else 0
+    total = sum([row[2] for row in data]) if data else 0
     average = total / len(data) if data else 0
 
     return render_template(
@@ -48,6 +41,7 @@ def home():
         average=average
     )
 
+# ---------- Add ----------
 @app.route("/add", methods=["GET", "POST"])
 def add_student():
     if request.method == "POST":
@@ -63,6 +57,42 @@ def add_student():
         return redirect("/")
 
     return render_template("add.html")
+
+# ---------- Delete ----------
+@app.route("/delete/<int:id>")
+def delete_student(id):
+    conn = sqlite3.connect("students.db")
+    cursor = conn.cursor()
+    cursor.execute("DELETE FROM students WHERE rowid = ?", (id,))
+    conn.commit()
+    conn.close()
+
+    return redirect("/")
+
+# ---------- Edit ----------
+@app.route("/edit/<int:id>", methods=["GET", "POST"])
+def edit_student(id):
+    conn = sqlite3.connect("students.db")
+    cursor = conn.cursor()
+
+    if request.method == "POST":
+        name = request.form["name"]
+        marks = int(request.form["marks"])
+
+        cursor.execute(
+            "UPDATE students SET name=?, marks=? WHERE rowid=?",
+            (name, marks, id)
+        )
+        conn.commit()
+        conn.close()
+        return redirect("/")
+
+    cursor.execute("SELECT name, marks FROM students WHERE rowid=?", (id,))
+    student = cursor.fetchone()
+    conn.close()
+
+    return render_template("edit.html", student=student, id=id)
+
 
 if __name__ == "__main__":
     app.run(debug=True)
